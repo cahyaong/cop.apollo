@@ -23,12 +23,10 @@
 // <creation_timestamp>Wednesday, 28 October 2015 11:05:08 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class FirstPersonController : MonoBehaviour
 {
-    [UsedImplicitly]
     public float walkingSpeed = 5;
 
     public float runningSpeed = 15;
@@ -39,7 +37,6 @@ public class FirstPersonController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    [UsedImplicitly]
     private void Update()
     {
         if (Input.GetKey(KeyCode.Escape))

@@ -24,12 +24,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Globalization;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
-    [UsedImplicitly]
     private void Start()
     {
         for (var index = 1; index <= 10; index++)

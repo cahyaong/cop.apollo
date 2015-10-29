@@ -23,7 +23,6 @@
 // <creation_timestamp>Wednesday, 28 October 2015 10:33:40 AM UTC</creation_timestamp>
 // --------------------------------------------------------------------------------------------------------------------
 
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class FirstPersonView : MonoBehaviour
@@ -32,15 +31,33 @@ public class FirstPersonView : MonoBehaviour
 
     private float _rotationY;
 
-    [UsedImplicitly]
+    private GUIStyle _crosshairStyle;
+
+    private void Awake()
+    {
+        var crosshairTexture = new Texture2D(1, 1);
+
+        this._crosshairStyle = new GUIStyle
+        {
+            normal = { background = crosshairTexture }
+        };
+    }
+
     private void Update()
     {
         this._rotationX += Input.GetAxis("Mouse X") * 5;
         this._rotationY += Input.GetAxis("Mouse Y") * 5;
-        this._rotationY = Mathf.Clamp(this._rotationY, -60, 60);
+        this._rotationY = Mathf.Clamp(this._rotationY, -90, 90);
 
         this.transform.localRotation =
             Quaternion.AngleAxis(this._rotationX, Vector3.up) *
             Quaternion.AngleAxis(this._rotationY, Vector3.left);
+    }
+
+    private void OnGUI()
+    {
+        var center = new Vector2(Screen.width / 2.0f, Screen.height / 2.0f);
+        GUI.Box(new Rect(center.x - 10, center.y, 21, 1), GUIContent.none, this._crosshairStyle);
+        GUI.Box(new Rect(center.x, center.y - 10, 1, 21), GUIContent.none, this._crosshairStyle);
     }
 }
