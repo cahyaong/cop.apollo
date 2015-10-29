@@ -29,12 +29,26 @@ using UnityEngine;
 public class FirstPersonController : MonoBehaviour
 {
     [UsedImplicitly]
-    public float speed = 5;
+    public float walkingSpeed = 5;
+
+    public float runningSpeed = 15;
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     [UsedImplicitly]
     private void Update()
     {
-        var distance = this.speed * (Input.GetKey(KeyCode.LeftShift) ? 3 : 1) * Time.deltaTime;
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        var distance = (Input.GetKey(KeyCode.LeftShift) ? this.runningSpeed : this.walkingSpeed) * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.A))
         {
